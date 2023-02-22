@@ -23,7 +23,7 @@ let incomeArr = [];
 let expensesArr = [];
 let moneyArr = [];
 
-//function to check transaction name input
+
 
 const showError = (input, min) => {
 	
