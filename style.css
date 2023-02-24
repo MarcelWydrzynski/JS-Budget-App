@@ -123,8 +123,10 @@ header {
 
 
 /* errors */ 
-
-.error-text {
+.error-msg,
+.error-transaction-name,
+.error-transaction-amount,
+.error-transaction-option {
     color: rgb(149, 6, 6);
     display: none;
 }

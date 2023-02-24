@@ -6,13 +6,19 @@ const addTransactionPanel = document.querySelector(".add-transaction-panel");
 const nameInput = document.querySelector("#name");
 const amountInput = document.querySelector("#amount");
 const categorySelect = document.querySelector("#category");
+const errorTransactionname = document.querySelector(".error-transaction-name");
+const errorTransactionAmount = document.querySelector(
+	".error-transaction-amount"
+);
+const errorTransactionOption = document.querySelector(
+	".error-transaction-option"
+);
+const errorMsg = document.querySelector(".error-msg");
 
 const addTransactionBtn = document.querySelector(".add-transaction");
 const saveBtn = document.querySelector(".save");
 const cancelBtn = document.querySelector(".cancel");
 const deleteAllBtn = document.querySelector(".delete-all");
-
-const errorMsg = document.querySelector(".error-text");
 
 const incomeSum = document.querySelector(".income-array");
 const expensesSum = document.querySelector(".expenses-array");
@@ -23,22 +29,59 @@ let incomeArr = [];
 let expensesArr = [];
 let moneyArr = [];
 
+const checkTransactionName = () => {
+	if (nameInput.value.length == 0) {
+		errorTransactionname.style.display = "block";
+		errorTransactionname.innerHTML = "Transaction name cannot be empty!";
+	} else if (nameInput.value.length > 12) {
+		errorTransactionname.style.display = "block";
+		errorTransactionname.innerHTML =
+			"Transaction name cannot be longer then 12 charcters";
+	} else {
+		errorTransactionname.innerHTML = "";
+	}
+};
 
+const checkTransactionAmount = () => {
+	if (amountInput.value.length == 0) {
+		errorTransactionAmount.style.display = "block";
+		errorTransactionAmount.innerHTML = "Transaction amount cannot be empty!";
+	} else if (amountInput.value.length >= 6) {
+		errorTransactionAmount.style.display = "block";
+		errorTransactionAmount.innerHTML =
+			"Transaction amount cannot be longer then 5 digits";
+	} else {
+		errorTransactionAmount.innerHTML = "";
+	}
+};
 
-const showError = (input, min) => {
-	
-}
-
+const checkSelect = () => {
+	if (categorySelect.selectedIndex == 0) {
+		errorTransactionOption.style.display = "block";
+		errorTransactionOption.innerHTML = "Choose one of the two options";
+	} else {
+		errorTransactionOption.innerHTML = "";
+	}
+};
 
 const createTransaction = () => {
-	if (errorMsg.textContent != "") {
-		console.log("heelo");
+	checkTransactionName();
+	checkTransactionAmount();
+	checkSelect();
+
+	if (
+		errorTransactionAmount.innerHTML != "" ||
+		errorTransactionAmount.innerHTML != "" ||
+		errorTransactionOption.innerHTML != ""
+	) {
+		errorMsg.style.display = "block";
+		errorMsg.innerHTML = "Fill out all the spaces correctly please";
 	} else {
 		let newTransaction = document.createElement("li");
 		newTransaction.classList.add("transaction");
 		newTransaction.innerHTML = `<p class="transaction-name">${nameInput.value}</p>
-	<p class="transaction-amount">${amountInput.value}zł<button class="delete"><i
-				class="fas fa-times"></i></button></p>`;
+	                                <p class="transaction-amount">${amountInput.value}zł<button class="delete">
+									<i class="fas fa-times"></i></button></p>`;
 
 		let newTransactionValue = newTransaction.childNodes[2].textContent;
 
@@ -49,17 +92,19 @@ const createTransaction = () => {
 			expensesSection.appendChild(newTransaction);
 			expensesArr.push(newTransactionValue);
 		}
-		console.log(incomeArr);
-		console.log(expensesArr);
 		closePanel();
+		console.log(errorTransactionOption.innerHTML);
 	}
 };
-
 
 const clearInputs = () => {
 	nameInput.value = "";
 	amountInput.value = "";
 	categorySelect.selectedIndex = 0;
+	errorTransactionname.innerHTML = "";
+	errorTransactionAmount.innerHTML = "";
+	errorTransactionOption.innerHTML = "";
+	errorMsg.innerHTML = "";
 };
 
 saveBtn.addEventListener("click", createTransaction);
@@ -87,8 +132,6 @@ const deleteAllTransactions = () => {
 };
 
 deleteAllBtn.addEventListener("click", deleteAllTransactions);
-
-console.log(errorMsg.textContent);
 
 // amountInput.value > 0 ? incomeSection.appendChild(newTransaction) && newTransaction.classList.add('income') : expensesSection.appendChild(newTransaction) && newTransaction.classList.add('expense');
 // moneyArr.push(parseFloat(amountInput.value));
