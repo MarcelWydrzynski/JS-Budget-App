@@ -1,3 +1,5 @@
+
+
 const incomeSection = document.querySelector(".income-area");
 const expensesSection = document.querySelector(".expenses-area");
 const availableMoney = document.querySelector(".available-money");
@@ -7,8 +9,12 @@ const nameInput = document.querySelector("#name");
 const amountInput = document.querySelector("#amount");
 const categorySelect = document.querySelector("#category");
 const errorTransactionname = document.querySelector(".error-transaction-name");
-const errorTransactionAmount = document.querySelector(".error-transaction-amount");
-const errorTransactionOption = document.querySelector(".error-transaction-option");
+const errorTransactionAmount = document.querySelector(
+	".error-transaction-amount"
+);
+const errorTransactionOption = document.querySelector(
+	".error-transaction-option"
+);
 const errorMsg = document.querySelector(".error-msg");
 
 const addTransactionBtn = document.querySelector(".add-transaction");
@@ -16,16 +22,20 @@ const saveBtn = document.querySelector(".save");
 const cancelBtn = document.querySelector(".cancel");
 const deleteAllBtn = document.querySelector(".delete-all");
 
-let moneyArr = [];
+
+let ID = 0;
+let newMoneyArr
+let moneyArr = []
+
 
 const checkTransactionName = () => {
 	if (nameInput.value.length == 0) {
 		errorTransactionname.style.display = "block";
 		errorTransactionname.innerHTML = "Transaction name cannot be empty!";
-	} else if (nameInput.value.length > 12) {
+	} else if (nameInput.value.length > 10) {
 		errorTransactionname.style.display = "block";
 		errorTransactionname.innerHTML =
-			"Transaction name cannot be longer then 12 charcters";
+			"Transaction name cannot be longer then 10 charcters";
 	} else {
 		errorTransactionname.innerHTML = "";
 	}
@@ -65,27 +75,31 @@ const createTransaction = () => {
 	) {
 		errorMsg.style.display = "block";
 		errorMsg.innerHTML = "Fill out all the spaces correctly please";
-		
 	} else {
 		let newTransaction = document.createElement("li");
+		newTransaction.setAttribute("id", ID);
 		newTransaction.classList.add("transaction");
 		newTransaction.innerHTML = `<p class="transaction-name">${nameInput.value}</p>
 	                                <p class="transaction-amount">${amountInput.value}zł
-									<button onclick = 'dziala()' class="delete">
+									<button onclick = 'transactionDelete(${ID})' class="delete">
 									<i class="fas fa-times"></i></button></p>`;
 
-		let newTransactionValue = newTransaction.childNodes[2].textContent;
+										let newTransactionValue = newTransaction.childNodes[2].textContent;
+
 
 		if (categorySelect.selectedIndex == 1) {
 			incomeSection.appendChild(newTransaction);
-			
-			
+			newTransaction.classList.add("income-transaction");
 		} else {
 			expensesSection.appendChild(newTransaction);
-			let newAmount2 = parseFloat(amountInput.value)
-			let newAmount = -newAmount2
-			console.log(newAmount);
+			newTransaction.classList.add("expense-transaction");
+			let newAmount2 = parseFloat(amountInput.value);
+			let newAmount = -newAmount2;
+
 		}
+
+		ID++;
+
 		newBalance();
 		closePanel();
 	}
@@ -93,26 +107,17 @@ const createTransaction = () => {
 
 const newBalance = () => {
 	if (categorySelect.selectedIndex == 1) {
-		
-		moneyArr.push(parseFloat(amountInput.value))
-		
+		moneyArr.push(parseFloat(amountInput.value));
 	} else {
-		
-		let newAmount2 = parseFloat(amountInput.value)
-		let newAmount = -newAmount2
-		console.log(newAmount);
-		moneyArr.push(newAmount)
+		moneyArr.push(parseFloat(-amountInput.value));
 	}
 
-	let newMoneyArr = moneyArr.reduce((a, b) => {
-		return a + b
-	})
+	let newMoneyArr = moneyArr.reduce((a, b) =>  a + b);
 
-	
-    availableMoney.textContent = `${newMoneyArr}$`
-	console.log(newMoneyArr);
+	availableMoney.textContent = `${newMoneyArr}$`
 
-}
+};
+
 
 const clearInputs = () => {
 	nameInput.value = "";
@@ -123,8 +128,6 @@ const clearInputs = () => {
 	errorTransactionOption.innerHTML = "";
 	errorMsg.innerHTML = "";
 };
-
-
 
 saveBtn.addEventListener("click", createTransaction);
 
@@ -144,11 +147,29 @@ cancelBtn.addEventListener(
 );
 
 const deleteAllTransactions = () => {
-	incomeSection.innerHTML = "<h3>Przychód:</h3>";
-	expensesSection.innerHTML = "<h3>Wydatki:</h3>";
-	availableMoney.textContent = "0zł";
+	incomeSection.innerHTML = "<h3>Income</h3>";
+	expensesSection.innerHTML = "<h3>Expenses</h3>";
+	availableMoney.textContent = "0$";
 	moneyArr = [0];
 };
 
 deleteAllBtn.addEventListener("click", deleteAllTransactions);
 
+transactionDelete = (id) => {
+	const transactionToDelete = document.getElementById(id);
+	let transactionAmount = parseFloat(transactionToDelete.childNodes[2].innerText);
+	
+	if (transactionToDelete.classList.contains('income-transaction')) {
+	  incomeSection.removeChild(transactionToDelete);
+	} else {
+	  expensesSection.removeChild(transactionToDelete);
+	  transactionAmount *= -1; // invert the sign of the amount
+	}
+	
+	const indexOfTransaction = moneyArr.indexOf(transactionAmount);
+	if (indexOfTransaction !== -1) {
+	  moneyArr.splice(indexOfTransaction, 1);
+	}
+	
+	newBalance();
+  };

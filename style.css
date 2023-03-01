@@ -2,131 +2,159 @@
     padding: 0;
     margin: 0 auto;
     box-sizing: border-box;
-}
-
-body {
-    background-color: aliceblue;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-}
-
-header {
+  }
+  
+  body {
+    background-color: #bee1f3;
+    color: #000000;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+  
+  header {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 30px;
-}
-
-.transactions-wrapper {
+  }
+  
+  .transactions-wrapper {
     text-align: center;
-}
-
-.transactions h2 {
+  }
+  
+  .transactions h2 {
     padding: 15px;
-}
-
-
-.transaction-list {
+  }
+  
+  .transaction-list {
     display: flex;
-}
-
-.income-area,
-.expenses-area {
-    border: 1px solid black;
+  }
+  
+  .income-area,
+  .expenses-area {
+    border: 1px solid #000000;
+    border-radius: 15px;
+    background-color: #59add7;
     flex-grow: 2;
     padding: 10px;
     margin: 3px;
-}
-
-.transaction {
+    max-width: 200px;
+  }
+  
+  .income-area {
+    background-color: #82c596;
+    border-color: #2f4858;
+  }
+  
+  .expenses-area {
+    background-color: #f57f17;
+    border-color: #1d1d1d;
+  }
+  
+  .transaction {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #ffffff;
     padding: 15px 0;
     position: relative;
-}
-
-.transaction button {
+  }
+  
+  .transaction button {
     border: none;
-    background-color: none;
-    color: red;
+    background-color: transparent;
+    color: #f44336;
     position: absolute;
     right: 0%;
     top: 50%;
     transform: translateY(-50%);
-}
-
-.options {
+  }
+  
+  .options {
     margin-top: 15%;
-
+  
     text-align: center;
     padding: 20px;
-}
-
-.options button {
+  }
+  
+  .options button {
     padding: 10px;
     margin: 5%;
-}
-
-.add-transaction-panel {
+    background-color: #e63946;
+    border-radius: 5px;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .options button:hover {
+    background-color: #f1faee;
+    color: #e63946;
+  }
+  
+  .add-transaction-panel {
     width: 100vw;
     height: 100vh;
-    background-color: grey;
-    position: absolute;
+    background-color: #457b9d;
+    position: fixed;
     top: 0;
     left: 0;
     text-align: center;
     display: none;
-}
-
-.panel-wrapper {
+    z-index: 999;
+  }
+  
+  .panel-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
-    
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .add-transaction-panel .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 2px 2px #000;
+  }
+  
+  .add-transaction-panel input,
+  .add-transaction-panel select {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f1faee;
+    color: #1d1f20;
+  }
+  
+  .add-transaction-panel input:focus,
+  .add-transaction-panel select:focus {
+    outline: none;
+  }
+  
+  .add-transaction-panel select {
+    background-color: #ffffff;
+    color: #1d1f20;
+  }
+  
+  .add-transaction-panel button {
+    padding: 10px 25px;
+    margin-top: 20px;
+    border-radius: 5px }
 
-.add-transaction-panel .title {
-   padding: 5%;
-}
-
-.add-transaction-panel input {
-    padding: 5px;
-    border: 1px solid black;
-}
-
-.add-transaction-panel select {
-    padding: 5px;
-    border: 1px solid black;
-}
-
- .form-box {
-   margin: 20% 0;
-   font-size: 24px;
-}
-
-.add-transaction-panel button {
-    padding: 25px;
-    margin: 10%;
-    border-radius: 10px;
-}
-
-.add-transaction-panel .title,
-.add-transaction-panel input,
-.add-transaction-panel select,
-.add-transaction-panel button {
-    background-color: grey;
-    color: white;
-    text-shadow: 2px 2px #000000;
-    
-}
-
-
-/* errors */ 
 .error-msg,
 .error-transaction-name,
 .error-transaction-amount,
 .error-transaction-option {
-    color: rgb(149, 6, 6);
+    color: rgb(255, 255, 255);
     display: none;
+    font-size: 20px;
+    text-shadow: #000;
 }
