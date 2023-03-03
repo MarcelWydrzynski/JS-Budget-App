@@ -1,5 +1,3 @@
-
-
 const incomeSection = document.querySelector(".income-area");
 const expensesSection = document.querySelector(".expenses-area");
 const availableMoney = document.querySelector(".available-money");
@@ -8,7 +6,7 @@ const addTransactionPanel = document.querySelector(".add-transaction-panel");
 const nameInput = document.querySelector("#name");
 const amountInput = document.querySelector("#amount");
 const categorySelect = document.querySelector("#category");
-const errorTransactionname = document.querySelector(".error-transaction-name");
+const errorTransactionName = document.querySelector(".error-transaction-name");
 const errorTransactionAmount = document.querySelector(
 	".error-transaction-amount"
 );
@@ -22,44 +20,42 @@ const saveBtn = document.querySelector(".save");
 const cancelBtn = document.querySelector(".cancel");
 const deleteAllBtn = document.querySelector(".delete-all");
 
-
 let ID = 0;
-let newMoneyArr
-let moneyArr = []
-
+let newMoneyArr;
+let moneyArr = [];
 
 const checkTransactionName = () => {
 	if (nameInput.value.length == 0) {
-		errorTransactionname.style.display = "block";
-		errorTransactionname.innerHTML = "Transaction name cannot be empty!";
-	} else if (nameInput.value.length > 10) {
-		errorTransactionname.style.display = "block";
-		errorTransactionname.innerHTML =
-			"Transaction name cannot be longer then 10 charcters";
+		errorTransactionName.style.visibility = "visible";
+		errorTransactionName.innerHTML = "Transaction name cannot be empty!";
+	} else if (nameInput.value.length >= 12) {
+		errorTransactionName.style.visibility = "visible";
+		errorTransactionName.innerHTML =
+			"Transaction name cannot be longer then 12 charcters";
 	} else {
-		errorTransactionname.innerHTML = "";
+		errorTransactionName.style.visibility = "hidden";
 	}
 };
 
 const checkTransactionAmount = () => {
 	if (amountInput.value.length == 0) {
-		errorTransactionAmount.style.display = "block";
+		errorTransactionAmount.style.visibility = "visible";
 		errorTransactionAmount.innerHTML = "Transaction amount cannot be empty!";
 	} else if (amountInput.value.length >= 6) {
-		errorTransactionAmount.style.display = "block";
+		errorTransactionAmount.style.visibility = "visible";
 		errorTransactionAmount.innerHTML =
 			"Transaction amount cannot be longer then 5 digits";
 	} else {
-		errorTransactionAmount.innerHTML = "";
+		errorTransactionAmount.style.visibility = "hidden";
 	}
 };
 
 const checkSelect = () => {
 	if (categorySelect.selectedIndex == 0) {
-		errorTransactionOption.style.display = "block";
-		errorTransactionOption.innerHTML = "Choose one of the two options";
+		errorTransactionOption.style.visibility = "visible";
+		errorTransactionOption.textContent = "Choose one of the two options";
 	} else {
-		errorTransactionOption.innerHTML = "";
+		errorTransactionOption.style.visibility = "hidden";
 	}
 };
 
@@ -69,23 +65,22 @@ const createTransaction = () => {
 	checkSelect();
 
 	if (
-		errorTransactionAmount.innerHTML != "" ||
-		errorTransactionAmount.innerHTML != "" ||
-		errorTransactionOption.innerHTML != ""
+		errorTransactionName.style.visibility === "visible" ||
+		errorTransactionAmount.style.visibility === "visible" ||
+		errorTransactionOption.style.visibility === "visible"
 	) {
-		errorMsg.style.display = "block";
+		errorMsg.style.visibility = "visible";
 		errorMsg.innerHTML = "Fill out all the spaces correctly please";
 	} else {
 		let newTransaction = document.createElement("li");
 		newTransaction.setAttribute("id", ID);
-		newTransaction.classList.add("transaction");
+		newTransaction.classList.add("transaction", "enlarge");
 		newTransaction.innerHTML = `<p class="transaction-name">${nameInput.value}</p>
 	                                <p class="transaction-amount">${amountInput.value}zł
 									<button onclick = 'transactionDelete(${ID})' class="delete">
 									<i class="fas fa-times"></i></button></p>`;
 
-										let newTransactionValue = newTransaction.childNodes[2].textContent;
-
+		let newTransactionValue = newTransaction.childNodes[2].textContent;
 
 		if (categorySelect.selectedIndex == 1) {
 			incomeSection.appendChild(newTransaction);
@@ -95,7 +90,6 @@ const createTransaction = () => {
 			newTransaction.classList.add("expense-transaction");
 			let newAmount2 = parseFloat(amountInput.value);
 			let newAmount = -newAmount2;
-
 		}
 
 		ID++;
@@ -112,21 +106,19 @@ const newBalance = () => {
 		moneyArr.push(parseFloat(-amountInput.value));
 	}
 
-	let newMoneyArr = moneyArr.reduce((a, b) =>  a + b);
+	let newMoneyArr = moneyArr.reduce((a, b) => a + b);
 
-	availableMoney.textContent = `${newMoneyArr}$`
-
+	availableMoney.textContent = `Available Funds: ${newMoneyArr}$`;
 };
-
 
 const clearInputs = () => {
 	nameInput.value = "";
 	amountInput.value = "";
 	categorySelect.selectedIndex = 0;
-	errorTransactionname.innerHTML = "";
-	errorTransactionAmount.innerHTML = "";
-	errorTransactionOption.innerHTML = "";
-	errorMsg.innerHTML = "";
+	errorTransactionName.style.visibility = "hidden";
+	errorTransactionAmount.style.visibility = "hidden";
+	errorTransactionOption.style.visibility = "hidden";
+	errorMsg.style.visibility = "hidden";
 };
 
 saveBtn.addEventListener("click", createTransaction);
@@ -147,9 +139,9 @@ cancelBtn.addEventListener(
 );
 
 const deleteAllTransactions = () => {
-	incomeSection.innerHTML = "<h3>Income</h3>";
-	expensesSection.innerHTML = "<h3>Expenses</h3>";
-	availableMoney.textContent = "0$";
+	incomeSection.innerHTML = "";
+	expensesSection.innerHTML = "";
+	availableMoney.textContent = "Available Funds: 0$";
 	moneyArr = [0];
 };
 
@@ -157,19 +149,24 @@ deleteAllBtn.addEventListener("click", deleteAllTransactions);
 
 transactionDelete = (id) => {
 	const transactionToDelete = document.getElementById(id);
-	let transactionAmount = parseFloat(transactionToDelete.childNodes[2].innerText);
-	
-	if (transactionToDelete.classList.contains('income-transaction')) {
-	  incomeSection.removeChild(transactionToDelete);
-	} else {
-	  expensesSection.removeChild(transactionToDelete);
-	  transactionAmount *= -1; // invert the sign of the amount
-	}
-	
-	const indexOfTransaction = moneyArr.indexOf(transactionAmount);
-	if (indexOfTransaction !== -1) {
-	  moneyArr.splice(indexOfTransaction, 1);
-	}
-	
-	newBalance();
-  };
+	transactionToDelete.classList.add("shrink");
+	let transactionAmount = parseFloat(
+		transactionToDelete.childNodes[2].innerText
+	);
+
+	setTimeout(() => {
+		if (transactionToDelete.classList.contains("income-transaction")) {
+			incomeSection.removeChild(transactionToDelete);
+		} else {
+			expensesSection.removeChild(transactionToDelete);
+			transactionAmount *= -1;
+		}
+
+		const indexOfTransaction = moneyArr.indexOf(transactionAmount);
+		if (indexOfTransaction !== -1) {
+			moneyArr.splice(indexOfTransaction, 1);
+		}
+
+		newBalance();
+	}, 1000);
+};

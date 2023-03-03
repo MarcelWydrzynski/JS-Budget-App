@@ -17,64 +17,63 @@
 
     <header>
         <h1><i class="fas fa-wallet"></i> Wallet</h1>
-        <p>Finace manager</p>
     </header>
 
     <main>
-        <div class="transactions-wrapper">
-        <section class="transactions">
+        
+          <section class="transactions">
             <h2 class="title">Transaction list</h2>
             <div class="transaction-list">
+                <h3>Income</h3>
                 <div class="income-area">
-                    <h3>Income</h3>
+                   
                 </div>
+                <h3>Expenses</h3>
                 <div class="expenses-area">
-                    <h3>Expenses</h3>
-                    
                 </div>
             </div>
-        </section>
-        </div>
+          </section>
+        
 
         <section class="options">
-            <div>
-                <h2 class="title">Available money:</h2>
-                <p class="available-money">0$</p>
+            <div class="heading">
+               <p class="available-money">Available Funds: 0$</p>
             </div>
             <div class="controls">
-                <button class="add-transaction"><i class="fas fa-plus"></i> add transaction</button>
-                <button class="delete-all"><i class="far fa-trash-alt"></i> delete everything</button>
+                <button class="add-transaction"><i class="fas fa-plus"></i> Add transaction</button>
+                <button class="delete-all"><i class="far fa-trash-alt"></i> Delete everything</button>
             </div>
         </section>
     </main>
-</div>
+
     <div class="add-transaction-panel">
-        <div class="panel-wrapper"> <h2 class="title">add new transaction</h2>
+        <div class="panel-wrapper"> <h2 class="title">Add new transaction</h2>
             
             <div class="form-box">
-                <label for="name">name:</label>
+                <label for="name">Name:</label>
                 <input type="text" id="name"></input>
-                <p class="error-transaction-name"></p>
+                <p class="error-transaction-name">Transaction name cannot be longer then 10 charcters</p>
             </div>
             
             <div class="form-box">
-            <label for="amount">amount:</label>
+            <label for="amount">Amount:</label>
             <input type="number" id="amount">
-            <p class="error-transaction-amount"></p>
+            <p class="error-transaction-amount">Transaction amount cannot be longer then 5 digits</p>
              </div>
 
             <div class="form-box">
-            <label for="category">select category:</label>
+            <label for="category">Select category:</label>
             <select id="category">
-                <option value="none" selected>chose if the transaction is a income or expense</option>
-                <option value="income">income</option>
-                <option value="shopping">expense</option>
+                <option value="none" selected>Choose if the transaction is an income or expense</option>
+                <option value="income">Income</option>
+                <option value="shopping">Expense</option>
             </select>
-            <p class="error-transaction-option"></p>
+            <p class="error-transaction-option">Transaction amount cannot be longer then 5 digits</p>
             
         </div>
-        <p class="error-msg"></p>
+        
             <div class="panel-buttons">
+                <p class="error-msg">Transaction amount cannot be longer then 5 digits</p>
                 <button class="save" type="button"><i class="fas fa-save"></i> save</button>
                 <button class="cancel" type="button"><i class="far fa-window-close"></i> cancel</button>
             </div>

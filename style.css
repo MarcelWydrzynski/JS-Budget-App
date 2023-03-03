@@ -1,160 +1,218 @@
 * {
-    padding: 0;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-  
-  body {
-    background-color: #bee1f3;
-    color: #000000;
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  }
-  
-  header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 30px;
-  }
-  
-  .transactions-wrapper {
-    text-align: center;
-  }
-  
-  .transactions h2 {
-    padding: 15px;
-  }
-  
-  .transaction-list {
-    display: flex;
-  }
-  
-  .income-area,
-  .expenses-area {
-    border: 1px solid #000000;
-    border-radius: 15px;
-    background-color: #59add7;
-    flex-grow: 2;
-    padding: 10px;
-    margin: 3px;
-    max-width: 200px;
-  }
-  
-  .income-area {
-    background-color: #82c596;
-    border-color: #2f4858;
-  }
-  
-  .expenses-area {
-    background-color: #f57f17;
-    border-color: #1d1d1d;
-  }
-  
-  .transaction {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #ffffff;
-    padding: 15px 0;
-    position: relative;
-  }
-  
-  .transaction button {
-    border: none;
-    background-color: transparent;
-    color: #f44336;
-    position: absolute;
-    right: 0%;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .options {
-    margin-top: 15%;
-  
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .options button {
-    padding: 10px;
-    margin: 5%;
-    background-color: #e63946;
-    border-radius: 5px;
-    border: none;
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-  }
-  
-  .options button:hover {
-    background-color: #f1faee;
-    color: #e63946;
-  }
-  
-  .add-transaction-panel {
-    width: 100vw;
-    height: 100vh;
-    background-color: #457b9d;
-    position: fixed;
-    top: 0;
-    left: 0;
-    text-align: center;
-    display: none;
-    z-index: 999;
-  }
-  
-  .panel-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .add-transaction-panel .title {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #fff;
-    text-shadow: 2px 2px #000;
-  }
-  
-  .add-transaction-panel input,
-  .add-transaction-panel select {
-    display: block;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: #f1faee;
-    color: #1d1f20;
-  }
-  
-  .add-transaction-panel input:focus,
-  .add-transaction-panel select:focus {
-    outline: none;
-  }
-  
-  .add-transaction-panel select {
-    background-color: #ffffff;
-    color: #1d1f20;
-  }
-  
-  .add-transaction-panel button {
-    padding: 10px 25px;
-    margin-top: 20px;
-    border-radius: 5px }
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #2c2f33;
+	color: #ffffff;
+	font-family: "Roboto", sans-serif;
+	font-size: 16px;
+}
+
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #1abc9c;
+	padding: 20px;
+	text-shadow: 5px 5px 5px black;
+}
+
+main {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.transactions {
+	display: flex;
+	flex-direction: column;
+}
+
+.title {
+	font-size: 24px;
+	text-align: center;
+	display: inline;
+	padding: 20px;
+}
+
+.transaction-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	flex-direction: column;
+	margin-top: 20px;
+	
+}
+
+.income-area,
+.expenses-area {
+	border-radius: 10px;
+	margin-bottom: 20px;
+	padding: 10px;
+	text-align: center;
+	min-width: 271px;
+}
+
+.income-area {
+	background-color: #1abc9c;
+	color: #ffffff;
+}
+
+.expenses-area {
+	background-color: #e74c3c;
+	color: #ffffff;
+}
+
+.expenses-area i {
+	color: #fff;
+}
+
+.transaction {
+	display: flex;
+	justify-content: space-around;
+	padding: 10px 0;
+	position: relative;
+	border-bottom: 2px solid #fff;
+}
+
+.transaction button {
+	border: none;
+	background-color: transparent;
+	color: #e74c3c;
+	cursor: pointer;
+	font-size: 16px;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.options {
+	background-color: #1abc9c;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+.options .heading {
+	font-size: 24px;
+	text-align: center;
+	padding: 10px;
+}
+
+.controls {
+	display: flex;
+	justify-content: space-around;
+}
+
+.options button {
+	padding: 12px;
+	border-radius: 15px;
+	margin-bottom: 10px;
+	border: none;
+	box-shadow: 5px 5px 5px black;
+}
+
+.add-transaction-panel {
+	width: 100vw;
+	height: 100vh;
+	background-color: #1abc9c;
+	position: fixed;
+	top: 0;
+	left: 0;
+	text-align: center;
+	z-index: 999;
+}
+
+.panel-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.add-transaction-panel .title {
+	font-size: 24px;
+	margin-bottom: 20px;
+	color: #fff;
+	text-shadow: 2px 2px #000;
+}
+
+.form-box {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 92%;
+	text-align: left;
+}
+
+.add-transaction-panel input,
+.add-transaction-panel select {
+	padding: 10px;
+	border-radius: 5px;
+	font-size: 16px;
+	background-color: #f1faee;
+	color: #1d1f20;
+}
+
+.add-transaction-panel input:focus,
+.add-transaction-panel select:focus {
+	outline: none;
+}
+
+.add-transaction-panel select {
+	background-color: #ffffff;
+	color: #1d1f20;
+}
+
+.add-transaction-panel button {
+	padding: 10px 25px;
+	margin-top: 20px;
+	border-radius: 5px;
+}
 
 .error-msg,
 .error-transaction-name,
 .error-transaction-amount,
 .error-transaction-option {
-    color: rgb(255, 255, 255);
-    display: none;
-    font-size: 20px;
-    text-shadow: #000;
+	color: white;
+	visibility: hidden;
+	font-size: 16px;
+	text-shadow: #000;
+}
+
+/*animations*/
+
+.enlarge {
+	animation: enlarge 1s ease-in;
+}
+
+.shrink {
+	animation: shrink 1s ease-in;
+}
+
+@keyframes enlarge {
+	from {
+		transform: scale(0);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+
+@keyframes shrink {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(0);
+	}
 }
