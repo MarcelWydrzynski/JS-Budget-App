@@ -11,6 +11,8 @@ body {
 	font-size: 16px;
 }
 
+
+
 header {
 	display: flex;
 	flex-direction: column;
@@ -19,18 +21,20 @@ header {
 	background-color: #1abc9c;
 	padding: 20px;
 	text-shadow: 5px 5px 5px black;
+	border-radius: 20px;
 }
 
 main {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: space-between;
+ display:flex;
+ flex-direction: column;
+ height: calc(100vh - 85px);
+ justify-content: space-between;
 }
 
 .transactions {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 .title {
@@ -94,9 +98,8 @@ main {
 
 .options {
 	background-color: #1abc9c;
-	position: absolute;
-	bottom: 0;
 	width: 100%;
+	border-radius: 20px;
 }
 
 .options .heading {
@@ -127,6 +130,7 @@ main {
 	left: 0;
 	text-align: center;
 	z-index: 999;
+	display: none;
 }
 
 .panel-wrapper {
@@ -189,6 +193,19 @@ main {
 	text-shadow: #000;
 }
 
+/*media queries*/
+
+@media all and (min-width: 700px) {
+	header,
+	.options, 
+	.transactions {
+		width: 700px;
+		margin: 0 auto;
+		border-radius: 25px; 
+		font-size: 20px;
+	}
+}
+
 /*animations*/
 
 .enlarge {
@@ -198,6 +215,7 @@ main {
 .shrink {
 	animation: shrink 1s ease-in;
 }
+
 
 @keyframes enlarge {
 	from {
