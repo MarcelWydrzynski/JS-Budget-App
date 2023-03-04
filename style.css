@@ -11,8 +11,6 @@ body {
 	font-size: 16px;
 }
 
-
-
 header {
 	display: flex;
 	flex-direction: column;
@@ -22,12 +20,13 @@ header {
 	padding: 20px;
 	text-shadow: 5px 5px 5px black;
 	border-radius: 20px;
+	height: 10%;
 }
 
 main {
  display:flex;
  flex-direction: column;
- height: calc(100vh - 85px);
+ height: 90%;
  justify-content: space-between;
 }
 
@@ -84,6 +83,14 @@ main {
 	border-bottom: 2px solid #fff;
 }
 
+.transaction .transaction-name {
+	min-width: 40%;
+}
+
+.transaction .transaction-amount {
+	min-width: 30%;
+}
+
 .transaction button {
 	border: none;
 	background-color: transparent;
@@ -91,7 +98,7 @@ main {
 	cursor: pointer;
 	font-size: 16px;
 	position: absolute;
-	right: 0;
+	right: 5%;
 	top: 50%;
 	transform: translateY(-50%);
 }
@@ -100,6 +107,7 @@ main {
 	background-color: #1abc9c;
 	width: 100%;
 	border-radius: 20px;
+	align-self: flex-end;
 }
 
 .options .heading {
@@ -122,8 +130,8 @@ main {
 }
 
 .add-transaction-panel {
-	width: 100vw;
-	height: 100vh;
+    height: 100%;
+	width: 100%;
 	background-color: #1abc9c;
 	position: fixed;
 	top: 0;

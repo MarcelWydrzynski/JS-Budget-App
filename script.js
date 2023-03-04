@@ -27,10 +27,10 @@ const checkTransactionName = () => {
 	if (nameInput.value.length == 0) {
 		errorTransactionName.style.visibility = "visible";
 		errorTransactionName.innerHTML = "Transaction name cannot be empty!";
-	} else if (nameInput.value.length >= 12) {
+	} else if (nameInput.value.length > 20) {
 		errorTransactionName.style.visibility = "visible";
 		errorTransactionName.innerHTML =
-			"Transaction name cannot be longer then 12 charcters";
+			"Transaction name cannot be longer then 20 charcters";
 	} else {
 		errorTransactionName.style.visibility = "hidden";
 	}
@@ -40,10 +40,10 @@ const checkTransactionAmount = () => {
 	if (amountInput.value.length == 0) {
 		errorTransactionAmount.style.visibility = "visible";
 		errorTransactionAmount.innerHTML = "Transaction amount cannot be empty!";
-	} else if (amountInput.value.length >= 6) {
+	} else if (amountInput.value.length > 6) {
 		errorTransactionAmount.style.visibility = "visible";
 		errorTransactionAmount.innerHTML =
-			"Transaction amount cannot be longer then 5 digits";
+			"Transaction amount cannot be longer then 6 digits";
 	} else {
 		errorTransactionAmount.style.visibility = "hidden";
 	}
